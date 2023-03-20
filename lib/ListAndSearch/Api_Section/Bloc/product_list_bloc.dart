@@ -34,16 +34,17 @@ class ProductListBloc extends Bloc<ProductListEvent, ProductListState> {
       try{
         emit(SearchLoading());
         searchModelClass = await apiSearchProduct.getSearchFunction(productName: event.productName, length: event.length);
-        emit(SearchLoaded());
-
-      }catch(e){
-        emit(SearchError());
+        if(searchModelClass.statusCode == 6000){
+          emit(SearchLoaded());
+        }else{
+          emit(SearchError(msg:"Product Not found With stock" ),);
+        }
+      }catch(e) {
         print("-----------------SearchBloc$e");
-
+        emit(SearchError(msg: e.toString()));
 
       }
 
-      // TODO: implement event handler
     });
   }
 }

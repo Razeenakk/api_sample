@@ -9,4 +9,6 @@ class ProductListLoaded extends ProductListState {}
 class ProductListError extends ProductListState {}
 class SearchLoading extends ProductListState {}
 class SearchLoaded extends ProductListState {}
-class SearchError extends ProductListState {}
+class SearchError extends ProductListState {final String msg;
+
+  SearchError({required this.msg});}
